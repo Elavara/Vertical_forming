@@ -1,0 +1,96 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculated Results Details</title>
+    <style>
+        /* Your existing CSS code */
+        .calculate-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto; /* Center the button */
+            width: 200px;
+            text-align: center;
+        }
+
+        .calculate-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Calculated Results Details</h1>
+    <!-- Your existing HTML content -->
+
+    <h2>Calculated Data</h2>
+    <%
+        // Parse the parameters as doubles
+        double estimatedTime = Double.parseDouble(request.getParameter("estimated_time_days"));
+        double totalQuantityAvailable = Double.parseDouble(request.getParameter("total_quantity_available"));
+        double projectedGrowthNextMonth = Double.parseDouble(request.getParameter("projected_growth_next_month"));
+        double inventoryTurnoverRate = Double.parseDouble(request.getParameter("inventory_turnover_rate"));
+        double daysUntilFullStock = Double.parseDouble(request.getParameter("days_until_full_stock"));
+        double supplyDeficit = Double.parseDouble(request.getParameter("supply_deficit"));
+        double growthPotential = Double.parseDouble(request.getParameter("growth_potential"));
+
+        // Perform some calculations
+        double totalAvailableWithGrowth = totalQuantityAvailable + projectedGrowthNextMonth; // Total available including growth
+        double estimatedSupply = totalAvailableWithGrowth - supplyDeficit; // Estimated supply after accounting for deficit
+        double growthRate = (totalQuantityAvailable / inventoryTurnoverRate); // Growth rate based on inventory turnover
+    %>
+
+    <!-- Display calculated results in a form -->
+    <form action="CalculatedDataServlet" method="POST">
+        <table>
+            <tr>
+                <th>Total Available with Growth</th>
+                <td><input type="hidden" name="totalAvailableWithGrowth" value="<%= String.format("%.2f", totalAvailableWithGrowth) %>">
+                    <%= String.format("%.2f", totalAvailableWithGrowth) %> tons
+                </td>
+            </tr>
+            <tr>
+                <th>Estimated Supply After Deficit</th>
+                <td><input type="hidden" name="estimatedSupply" value="<%= String.format("%.2f", estimatedSupply) %>">
+                    <%= String.format("%.2f", estimatedSupply) %> tons
+                </td>
+            </tr>
+            <tr>
+                <th>Growth Rate (tons/day)</th>
+                <td><input type="hidden" name="growthRate" value="<%= String.format("%.2f", growthRate) %>">
+                    <%= String.format("%.2f", growthRate) %> tons/day
+                </td>
+            </tr>
+            <tr>
+                <th>Days Until Full Stock</th>
+                <td><input type="hidden" name="daysUntilFullStock" value="<%= daysUntilFullStock %>">
+                    <%= daysUntilFullStock %> days
+                </td>
+            </tr>
+            <tr>
+                <th>Growth Potential</th>
+                <td><input type="hidden" name="growthPotential" value="<%= String.format("%.2f", growthPotential) %>">
+                    <%= String.format("%.2f", growthPotential) %> tons
+                </td>
+            </tr>
+        </table>
+
+        <!-- Calculate Button -->
+        <button type="submit" class="calculate-button">Calculate</button>
+    </form>
+
+    <a href="module3_culativation_process.jsp" class="back-button">Back</a>
+</div>
+
+</body>
+</html>

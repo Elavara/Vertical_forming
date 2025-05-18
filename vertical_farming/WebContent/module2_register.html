@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/uf-style.css">
+    <title>Register Form</title>
+    <style>
+      body {
+        background: url('./assets/img/regw2.jpg') no-repeat center center fixed;
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+      .uf-form-signin {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+        color: white;
+      }
+      .back-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="uf-form-signin">
+      <div class="text-center">
+        <h1 class="text-white h3">Account Register</h1>
+      </div>
+      <form class="mt-4" action="proavailability" method="post">
+        <div class="input-group uf-input-group input-group-lg mb-3">
+          <span class="input-group-text fa fa-user"></span>
+          <input type="text" class="form-control" name="name" placeholder="Your name" required autocomplete="off">
+        </div>
+        <div class="input-group uf-input-group input-group-lg mb-3">
+          <span class="input-group-text fa fa-envelope"></span>
+          <input type="email" class="form-control" name="email" placeholder="Email address" required autocomplete="off">
+        </div>
+        <div class="input-group uf-input-group input-group-lg mb-3">
+          <span class="input-group-text fa fa-phone"></span>
+          <input type="text" class="form-control" name="phone_number" placeholder="Your phone" 
+                 maxlength="10" required autocomplete="off" 
+                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
+        </div>
+        <div class="input-group uf-input-group input-group-lg mb-3">
+          <span class="input-group-text fa fa-home"></span>
+          <textarea class="form-control" name="address" placeholder="Enter your address" rows="3" required autocomplete="off"></textarea>
+        </div>
+         
+        <div class="d-grid mb-4">
+          <button type="submit" class="btn uf-btn-primary btn-lg">Sign Up</button>
+        </div>
+        <div class="mt-4 text-center">
+          <span class="text-white">Already a member?</span>
+          <a href="module2_login.html">Login</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="back-button">
+      <a href="module2_login.html" class="btn btn-secondary btn-lg">
+        <i class="fa fa-arrow-left"></i> Back
+      </a>
+    </div>
+
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+  </body>
+</html>

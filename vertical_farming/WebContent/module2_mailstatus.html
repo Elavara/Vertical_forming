@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>Decent Email Login Form Responsive Widget Template : W3Layouts</title>
+
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="statusmail/css/style.css" type="text/css" media="all" />
+    <style>
+        /* Additional CSS for back button positioning */
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* Positioning for back button on the left */
+        .back-button.left {
+            left: 20px;
+        }
+
+        /* Positioning for back button on the right */
+        .back-button.right {
+            right: 20px;
+        }
+
+        .back-button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- login form -->
+    <section class="w3l-login-form">
+        <div id="form-section">
+            <div class="wrapper">
+
+                <!-- logo -->
+                <div class="logo">
+                    <a class="brand-logo" href="index.html">EMPLOYEE STATUS</a>
+                </div>
+                <!-- //logo -->
+
+                <!-- form -->
+                <div class="login-form">
+                    <form action="module2_mail_check.jsp" method="POST">
+                        <div class="form-fields d-grid">
+                            <input type="email" name="email" placeholder="Enter your email" autocomplete="off" required="required" />
+                        </div>
+                        <button type="submit">Check Mail</button>
+                    </form>
+                </div>
+                <div class="new-signup">
+                     <p class="signup">Don’t have an account yet? <a href="module2_register.html" class="signuplink">Get it now</a></p>
+                </div>
+                <!-- //form -->
+
+                <!-- copyright -->
+                <div class="copy-right"></div>
+                <!-- //copyright -->
+
+                <!-- Back button (bottom-left) -->
+                <div class="back-button left">
+                    <a href="index.html">Back to Home</a>
+                </div>
+
+                <!-- Back button (bottom-right) -->
+                <div class="back-button right">
+                    <a href="module2_login.html">Back to Login</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- /login form -->
+</body>
+
+</html>

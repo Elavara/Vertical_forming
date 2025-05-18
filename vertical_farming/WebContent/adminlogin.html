@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<!-- Head -->
+<head>
+
+    <title>Meetup Signin Form Flat Responsive Widget Template : W3layouts</title>
+
+    <!-- Meta-Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- style CSS -->
+    <link rel="stylesheet" href="adminlogin/css/style.css" type="text/css" media="all">
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="adminlogin/css/font-awesome.min.css" type="text/css" media="all">
+
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css?family=Mukta:300,400,500" rel="stylesheet">
+
+    <style>
+        /* CSS for the back button */
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .back-button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: light green;
+        }
+    </style>
+
+</head>
+<!-- //Head -->
+
+<!-- Body -->
+<body>
+
+    <section class="main">
+
+        <div class="bottom-grid">
+            <div class="logo">
+                <h1> <a href="index.html"> ADMIN LOGIN</a></h1>
+            </div>
+        </div>
+        
+        <div class="content-bottom">
+            <!-- Form redirects to adminhomepage.html on submit -->
+            <form action="adminhomepage.html" method="post">
+                <div class="field-group">
+                    <span class="fa fa-user" aria-hidden="true"></span>
+                    <div class="wthree-field">
+                        <input name="text1" id="text1" type="text" value="" placeholder="Username" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <span class="fa fa-lock" aria-hidden="true"></span>
+                    <div class="wthree-field">
+                        <input name="password" id="myInput" type="Password" placeholder="Password" autocomplete="off">
+                    </div>
+                </div>
+                <div class="wthree-field">
+                    <button type="submit" class="btn">Sign in</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Back button at the bottom right corner -->
+        <div class="back-button">
+            <a href="index.html">Back to Home</a>
+        </div>
+         
+    </section>
+
+</body>
+<!-- //Body -->
+
+</html>

@@ -1,0 +1,269 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculated Results Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+
+        th, td {
+            padding: 12px 18px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        td {
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .back-button {
+            padding: 10px 15px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            width: 150px;
+            text-align: center;
+        }
+
+        .back-button:hover {
+            background-color: #45a049;
+        }
+
+        .scrollable-table {
+            max-height: 400px; /* Set the maximum height for scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
+            border: 1px solid #ddd; /* Optional border for better visibility */
+            margin-bottom: 20px; /* Space below the table */
+        }
+
+        .scrollable-table table {
+            width: 100%; /* Make the table width 100% of its container */
+            margin: 0; /* Reset margin to avoid additional spacing */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Calculated Results Details</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <td><%= request.getParameter("id") %></td>
+        </tr>
+        <tr>
+            <th>Fruits/Vegetables</th>
+            <td><%= request.getParameter("fruits_vegetables") %></td>
+        </tr>
+        <tr>
+            <th>Employee ID</th>
+            <td><%= request.getParameter("employee_id") %></td>
+        </tr>
+        <tr>
+            <th>Remaining Tons Needed</th>
+            <td><%= request.getParameter("remaining_tons_needed") %></td>
+        </tr>
+        <tr>
+            <th>Estimated Time (Days)</th>
+            <td><%= request.getParameter("estimated_time_days") %></td>
+        </tr>
+        <tr>
+            <th>Total Quantity Available</th>
+            <td><%= request.getParameter("total_quantity_available") %></td>
+        </tr>
+        <tr>
+            <th>Projected Growth Next Month</th>
+            <td><%= request.getParameter("projected_growth_next_month") %></td>
+        </tr>
+        <tr>
+            <th>Inventory Turnover Rate</th>
+            <td><%= request.getParameter("inventory_turnover_rate") %></td>
+        </tr>
+        <tr>
+            <th>Days Until Full Stock</th>
+            <td><%= request.getParameter("days_until_full_stock") %></td>
+        </tr>
+        <tr>
+            <th>Supply Deficit</th>
+            <td><%= request.getParameter("supply_deficit") %></td>
+        </tr>
+        <tr>
+            <th>Growth Potential</th>
+            <td><%= request.getParameter("growth_potential") %></td>
+        </tr>
+        <tr>
+            <th>Current Stock Status</th>
+            <td><%= request.getParameter("current_stock_status") %></td>
+        </tr>
+    </table>
+
+    <h2>Filtered Cultivation Data</h2>
+    <div class="scrollable-table">
+        <table>
+            <tr>
+                <th>SI No</th>
+                <th>Employee ID</th>
+                <th>Fruits/Vegetables</th>
+                <th>Technique</th>
+                <th>Description</th>
+                <th>Growing Medium</th>
+                <th>Watering Method</th>
+                <th>Sunlight Exposure (hours/day)</th>
+                <th>Growth Rate (days)</th>
+                <th>Nutrient Delivery (g/week)</th>
+                <th>Space Efficiency (sq ft/plant)</th>
+                <th>Common Challenges</th>
+                <th>Environmental Impact</th>
+                <th>Ideal for</th>
+            </tr>
+            <%
+                String jdbcUrl = "jdbc:mysql://localhost:3306/vertical_farming"; // Update with your database name
+                String dbUser = "root"; // Update with your database username
+                String dbPassword = "root"; // Update with your database password
+
+                Connection conn = null;
+                PreparedStatement pstmt = null;
+                ResultSet rs = null;
+
+                try {
+                    // Establishing a database connection
+                    Class.forName("com.mysql.jdbc.Driver"); // Correct driver for MySQL Connector/J 8.x
+                    conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
+
+                    // Prepare statement to select rows matching the fruits_vegetables parameter
+                    String fruitsVegetablesParam = request.getParameter("fruits_vegetables");
+                    String sql = "SELECT * FROM module3_cultivation_uploaded WHERE `Fruits/Vegetables` = ?";
+                    pstmt = conn.prepareStatement(sql);
+                    pstmt.setString(1, fruitsVegetablesParam);
+                    rs = pstmt.executeQuery();
+
+                    // Loop through the result set and display the data in the table
+                    while (rs.next()) {
+                        %>
+                        <tr>
+                            <td><%= rs.getString("SI No") %></td>
+                            <td><%= rs.getString("Employee ID") %></td>
+                            <td><%= rs.getString("Fruits/Vegetables") %></td>
+                            <td><%= rs.getString("Technique") %></td>
+                            <td><%= rs.getString("Description") %></td>
+                            <td><%= rs.getString("Growing Medium") %></td>
+                            <td><%= rs.getString("Watering Method") %></td>
+                            <td><%= rs.getString("Sunlight Exposure (hours/day)") %></td>
+                            <td><%= rs.getString("Growth Rate (days)") %></td>
+                            <td><%= rs.getString("Nutrient Delivery (g/week)") %></td>
+                            <td><%= rs.getString("Space Efficiency (sq ft/plant)") %></td>
+                            <td><%= rs.getString("Common Challenges") %></td>
+                            <td><%= rs.getString("Environmental Impact") %></td>
+                            <td><%= rs.getString("Ideal for") %></td>
+                        </tr>
+                        <%
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    // Closing resources
+                    try {
+                        if (rs != null) rs.close();
+                        if (pstmt != null) pstmt.close();
+                        if (conn != null) conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            %>
+        </table>
+    </div>
+
+    <h2>Calculated Data</h2>
+    <%
+        // Parse the parameters as doubles
+        double estimatedTime = Double.parseDouble(request.getParameter("estimated_time_days"));
+        double totalQuantityAvailable = Double.parseDouble(request.getParameter("total_quantity_available"));
+        double projectedGrowthNextMonth = Double.parseDouble(request.getParameter("projected_growth_next_month"));
+        double inventoryTurnoverRate = Double.parseDouble(request.getParameter("inventory_turnover_rate"));
+        double daysUntilFullStock = Double.parseDouble(request.getParameter("days_until_full_stock"));
+        double supplyDeficit = Double.parseDouble(request.getParameter("supply_deficit"));
+        double growthPotential = Double.parseDouble(request.getParameter("growth_potential"));
+
+        // Perform some calculations
+        double totalAvailableWithGrowth = totalQuantityAvailable + projectedGrowthNextMonth; // Total available including growth
+        double estimatedSupply = totalAvailableWithGrowth - supplyDeficit; // Estimated supply after accounting for deficit
+        double growthRate = (totalQuantityAvailable / inventoryTurnoverRate); // Growth rate based on inventory turnover
+
+        // Display calculated results
+    %>
+    <table>
+        <tr>
+            <th>Total Available with Growth</th>
+            <td><%= String.format("%.2f", totalAvailableWithGrowth) %> tons</td>
+        </tr>
+        <tr>
+            <th>Estimated Supply After Deficit</th>
+            <td><%= String.format("%.2f", estimatedSupply) %> tons</td>
+        </tr>
+        <tr>
+            <th>Growth Rate (tons/day)</th>
+            <td><%= String.format("%.2f", growthRate) %> tons/day</td>
+        </tr>
+        <tr>
+            <th>Days Until Full Stock</th>
+            <td><%= daysUntilFullStock %> days</td>
+        </tr>
+        <tr>
+            <th>Growth Potential</th>
+            <td><%= String.format("%.2f", growthPotential) %> tons</td>
+        </tr>
+    </table>
+
+    <a href="module3_culativation_process.jsp" class="back-button">Back</a>
+</div>
+
+</body>
+</html>

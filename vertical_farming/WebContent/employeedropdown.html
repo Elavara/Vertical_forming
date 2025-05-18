@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Admin Dropdown Menu</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="dropdown/css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script src="dropdown/js/jquery.js" type="text/javascript"></script>
+		<link href='http:dropdown//fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+		<style>
+			/* Ensure the button is placed at the bottom */
+			.back-button {
+				position: fixed;
+				bottom: 20px;
+				left: 50%;
+				transform: translateX(-50%);
+				background-color: #4CAF50;
+				color: white;
+				padding: 10px 20px;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				text-align: center;
+				font-size: 16px;
+			}
+
+			.back-button:hover {
+				background-color: #45a049;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Dropdown Menu -->
+		<div class="wrapper-demo">
+			<div id="dd" class="wrapper-dropdown-2" tabindex="1">
+				ADMIN SETTINGS<span><img src="dropdown/images/menu.png"/></span>
+				<ul class="dropdown">
+					<li><a href="module2_admin_status.jsp">Inventory Status<i class="fa-brands fa-nfc-directional fa-beat-fade"></i></a></li>
+					<li><a href="module3_admin_status.jsp">Crop Cultivation <i class="fa-solid fa-filter fa-beat-fade"></i></a></li>
+					<li><a href="module4_admin_status.jsp">Harvest Schedule <i class="fa-solid fa-flask fa-beat-fade"></i></a></li>
+					<li><a href="module5_admin_status.jsp">Testing <i class="fa-solid fa-microscope fa-beat"></i></a></li>
+				</ul>
+			</div>
+		</div>
+		
+		<!-- Back Button at the Bottom -->
+		<button class="back-button" onclick="window.location.href='adminhomepage.html'">Back</button>
+		
+		<!-- Dropdown Script -->
+		<script type="text/javascript">
+			function DropDown(el) {
+				this.dd = el;
+				this.initEvents();
+			}
+			DropDown.prototype = {
+				initEvents: function() {
+					var obj = this;
+
+					obj.dd.on('click', function(event) {
+						$(this).toggleClass('active');
+						event.stopPropagation();
+					});	
+				}
+			}
+			$(function() {
+				var dd = new DropDown($('#dd'));
+
+				$(document).click(function() {
+					$('.wrapper-dropdown-2').removeClass('active');
+				});
+			});
+		</script>
+	</body>
+</html>
